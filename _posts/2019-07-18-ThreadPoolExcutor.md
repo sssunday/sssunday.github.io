@@ -7,10 +7,8 @@ categories:
 tags: [java, 线程池]
 comments: true
 ---
-ThreadPoolExcutor源码抽取其中最简单的逻辑
-一个大小为10的线程池
-线程池满了就往队列加任务
-
+ThreadPoolExcutor源码抽取其中最简单的逻辑<br>核心线程数大小为10<br>最大线程数大小为15<br>核心线程数满了就往队列加任务<br>队列满了就增加线程知道到达最大线程数
+<br><br>
 ##### 代码
     
    ```java
