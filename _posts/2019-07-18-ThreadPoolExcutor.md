@@ -7,22 +7,31 @@ categories:
 tags: [java, 线程池]
 comments: true
 ---
+ThreadPoolExcutor源码抽取其中最简单的逻辑
+一个大小为10的线程池
+线程池满了就往队列加任务
+
 ##### 代码
     
    ```java
     public class ThreadPoolExcutorDemo {
-        int workerCount = 10;//线程数
+        int coreCount = 10;//核心线程数
+        int maxCount = 15;//最大线程数
         //线程集合
         private final HashSet<Worker> workers = new HashSet<Worker>();
         //任务队列
         private final BlockingQueue<Runnable> workQueue = new ArrayBlockingQueue<Runnable>(1024);
         void addWorker(Runnable task){
-            if(workers.size() < 10){
+            if(workers.size() < coreCount){
+                Worker worker = new Worker(task);
+                workers.add(worker);
+                worker.t.start();
+            } else if(!workQueue.offer(task) && workers.size() < maxCount){
                 Worker worker = new Worker(task);
                 workers.add(worker);
                 worker.t.start();
             } else {
-                workQueue.offer(task);
+                System.out.println("线程池已满，任务队列已满");
             }
         }
 
