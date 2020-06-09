@@ -9,6 +9,8 @@ comments: true
 ---
 ### spring boot整合redis
 #### maven依赖
++ spring-boot-starter-data-redis 是redis依赖
++ commons-pool2是为了支撑lettuce连接池
 ```xml
 <dependency>
     <groupId>org.springframework.boot</groupId>
@@ -20,8 +22,6 @@ comments: true
     <version>2.6.2</version>
 </dependency>
 ```
-+ spring-boot-starter-data-redis 是redis依赖
-+ commons-pool2是为了支撑lettuce连接池
 
 #### redis yml配置
 ```yml
@@ -612,7 +612,7 @@ class TvshopJobApplicationTests {
 
     @Autowired
     RedisUtil redisUtil;
-    
+
     void redisTest(){
 
         Object value = redisUtil.get("test-key");
